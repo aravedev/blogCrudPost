@@ -1,7 +1,9 @@
 package com.springboot.blog.controller;
 
 import com.springboot.blog.payload.PostDto;
+import com.springboot.blog.payload.PostResponse;
 import com.springboot.blog.service.PostService;
+import com.springboot.blog.utils.AppConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +29,15 @@ public class PostController {
 
     // Get all post RestApi
     @GetMapping
-    public List<PostDto> getAllPosts(){
-        return postService.getAllPosts();
+    public PostResponse getAllPosts(
+            @RequestParam(name="pageNo", required = false, defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int pageNo,
+            @RequestParam(name="pageSize", required = false, defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int pageSize,
+            @RequestParam(name="sortBy", required = false ,defaultValue = AppConstants.DEFAULT_SORT_BY) String sortBy,
+            @RequestParam(name="sortDir", required = false, defaultValue = AppConstants.DEFAULT_SORT_DIRECTION) String sortDir
+    ){
+
+
+        return postService.getAllPosts(pageNo,pageSize, sortBy, sortDir);
     }
 
     // Get Post by Id
