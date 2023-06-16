@@ -6,7 +6,9 @@ import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+//@Data because mapper use String and it provoces a inf loop
+@Getter //changed by refactoring
+@Setter //changed by refactoring
 @AllArgsConstructor
 @NoArgsConstructor
 
